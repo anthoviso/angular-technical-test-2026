@@ -9,14 +9,14 @@ This is an Angular technical test project. The goal of this technical test is to
 
 ## How to run
 
-1 `npm i`: Install all dependencies.
-2 `npm start`: Launch client app and api server.
-3 Then go to : http://localhost:4200
+1. `npm i`: Install all dependencies.
+2. `npm start`: Launch client app and api server.
+3. Then go to : http://localhost:4200
 
 ## Architecture
 
-- **Api folder** : Node.js - Express server which prodvides a REST api.
-- **App folder** : Angular SPA which consumes the API.
+- **`api`** folder : Node.js - Express server which prodvides a REST api.
+- **`app`** folder : Angular SPA which consumes the API.
 
 ## Documentation
 
