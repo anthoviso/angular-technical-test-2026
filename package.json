@@ -1,0 +1,19 @@
+{
+  "name": "angular-technical-test",
+  "version": "1.0.0",
+  "description": "This is an Angular technical test project",
+  "workspaces": [
+    "api",
+    "app"
+  ],
+  "author": "Anthony VISOCCHI",
+  "license": "ISC",
+  "scripts": {
+    "start:api": "npm run start -w api",
+    "start:app": "npm run start -w app",
+    "start": "concurrently \"npm run start:api\" \"npm run start:app\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
