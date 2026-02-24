@@ -4,6 +4,10 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.0.
 
+## Icon Moon
+
+[Icomoon](https://icomoon.io) is an online tool. It helps to fix icons and generate a font to use them.
+
 ## Development server
 
 To start a local development server, run:

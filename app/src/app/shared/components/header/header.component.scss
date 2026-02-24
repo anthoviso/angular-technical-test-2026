@@ -1,0 +1,12 @@
+.header {
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__tabs {
+    display: flex;
+    gap: 1rem;
+  }
+}

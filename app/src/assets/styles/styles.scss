@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+// Base
+@use './base/reset' as *;
+@use './base/colors' as *;
+@use './base/fonts' as *;
+@use './base/texts' as *;
+
+main {
+  background: var(--color-bg-primary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}

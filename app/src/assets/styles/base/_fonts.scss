@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'eina03-semibold';
+  src:
+    url('../../fonts/eina/eina-03-semibold.ttf') format('truetype'),
+    url('../../fonts/eina/eina-03-semibold.woff2') format('woff2'),
+    url('../../fonts/eina/eina-03-semibold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'icons';
+  src:
+    url('../../fonts/icons/icons.woff2') format('woff2'),
+    url('../../fonts/icons/icons.ttf') format('truetype'),
+    url('../../fonts/icons/icons.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.icon {
+  /* Use !important to prevent extensions from overriding this font. */
+  font-family: 'icons' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-family: 'Open Sans', sans-serif;
+
+  .title,
+  .subtitle {
+    font-family: 'eina03-semibold', sans-serif;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CategoriesApi } from '../categories.api';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Categories } from '../categories.models';
@@ -6,6 +6,7 @@ import { Categories } from '../categories.models';
 @Component({
   selector: 'app-visible-categories',
   templateUrl: './visible-categories.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VisibleCategoriesComponent {
   private readonly categoriesApi = inject(CategoriesApi);

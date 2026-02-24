@@ -1,0 +1,21 @@
+@use './mixins' as mixins;
+
+.title {
+  font-size: mixins.px-to-rems(22px);
+  line-height: 120%;
+  color: var(--color-title);
+  font-weight: 400;
+}
+
+.subtitle {
+  font-size: mixins.px-to-rems(14px);
+  line-height: 120%;
+  font-weight: 600;
+  color: var(--color-title);
+}
+
+.text {
+  font-size: mixins.px-to-rems(14px);
+  line-height: 120%;
+  color: var(--color-paragraph);
+}
