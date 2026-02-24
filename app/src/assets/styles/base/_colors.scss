@@ -1,5 +1,6 @@
 html {
-  --color-text-btn: #fff;
+  --white: #fff;
+  --color-text-btn: var(--white);
 
   --color-separator: #dce4ed;
   --color-paragraph: #58676d;
@@ -14,6 +15,6 @@ html {
   --color-bg-secondary: #ffece6;
   --color-text-secondary: #fd755f;
 
-  --color-bg-tertiary: #ffece6;
-  --color-text-tertiary: #fd755f;
+  --color-bg-tertiary: #fff5bf;
+  --color-text-tertiary: #faa11c;
 }

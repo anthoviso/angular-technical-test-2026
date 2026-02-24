@@ -1,0 +1,9 @@
+<div class="category">
+  @if (category().group; as group) {
+    <app-tag [color]="group.color">
+      {{ group.name }}
+    </app-tag>
+  }
+  <h3 class="subtitle font-w-400">{{ category().wording }}</h3>
+  <p class="text">{{ category().description }}</p>
+</div>

@@ -1,3 +1,5 @@
+@use 'normalize.css/normalize.css';
+
 // Base
 @use './base/reset' as *;
 @use './base/colors' as *;
@@ -10,5 +12,6 @@ main {
 
 .container {
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
 }

@@ -1,7 +1,20 @@
-<div class="container">
-  <ul>
-    @for (category of categories(); track category.id) {
-      <li>{{ category.id }}</li>
-    }
-  </ul>
+<div class="visible-categories">
+  <div class="container visible-categories__container">
+    <form id="visibleCategoriesForm" class="visible-categories__form">
+      <app-search-input class="visible-categories__form__search" />
+      <app-select-input class="visible-categories__form__select">
+        <option value="">Tous les groupes de catégories</option>
+        @for (option of groupCategories(); track option.id) {
+          <option [value]="option.id">{{ option.name }}</option>
+        }
+      </app-select-input>
+    </form>
+    <ul class="visible-categories__list">
+      @for (category of visibleCategories(); track category.id) {
+        <li class="visible-categories__list-item">
+          <app-category [category]="category" />
+        </li>
+      }
+    </ul>
+  </div>
 </div>

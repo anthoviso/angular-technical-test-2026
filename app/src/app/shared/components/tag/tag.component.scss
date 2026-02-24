@@ -1,0 +1,19 @@
+.tag {
+  display: inline-block;
+  border-radius: 16px;
+  padding: 4px 12px;
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-tertiary);
+
+  &--m-blue,
+  &--m-purple {
+    color: var(--color-text-primary);
+    background: var(--color-bg-primary);
+  }
+
+  &--m-red,
+  &--m-pink {
+    color: var(--color-text-secondary);
+    background: var(--color-bg-secondary);
+  }
+}

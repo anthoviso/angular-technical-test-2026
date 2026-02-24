@@ -1,5 +1,7 @@
 @use './mixins' as mixins;
 
+$weight: 100, 200, 300, 400, 500, 600, 700, 800, 900;
+
 .title {
   font-size: mixins.px-to-rems(22px);
   line-height: 120%;
@@ -15,7 +17,13 @@
 }
 
 .text {
-  font-size: mixins.px-to-rems(14px);
+  font-size: mixins.px-to-rems(12px);
   line-height: 120%;
   color: var(--color-paragraph);
+}
+
+@each $w in $weight {
+  .font-w-#{$w} {
+    font-weight: $w;
+  }
 }

@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { Categories } from './categories.models';
+import { Category } from './categories.models';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 export const BASE_URL = '/api';
 
@@ -13,17 +13,17 @@ export class CategoriesApi {
 
   /**
    * Get all categories.
-   * @returns Categories[]
+   * @returns Category[]
    */
-  getAllCategories(): Observable<Categories[]> {
-    return this.http.get<Categories[]>(`${BASE_URL}/all-categories`);
+  getAllCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${BASE_URL}/all-categories`);
   }
 
   /**
    * Get visible categories.
-   * @returns number[]
+   * @returns  number[]
    */
   getVisibleCategories(): Observable<number[]> {
-    return this.http.get<number[]>(`${BASE_URL}/visible-categories`);
+    return this.http.get<{ id: number }[]>(`${BASE_URL}/visible-categories`).pipe(map((categories) => categories.map((category) => category.id)));
   }
 }

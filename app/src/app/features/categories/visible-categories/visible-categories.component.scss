@@ -1,0 +1,40 @@
+.visible-categories {
+  margin: 2rem auto;
+
+  &__container {
+    background: var(--white);
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px var(--color-separator);
+  }
+
+  &__form {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 1rem;
+
+    &__search {
+      flex-grow: 1;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--color-separator);
+
+    &-item {
+      width: 50%;
+      border-bottom: 1px solid var(--color-separator);
+
+      &:nth-child(odd) {
+        border-left: 1px solid var(--color-separator);
+        border-right: 1px solid var(--color-separator);
+      }
+
+      &:nth-child(even) {
+        border-right: 1px solid var(--color-separator);
+      }
+    }
+  }
+}
