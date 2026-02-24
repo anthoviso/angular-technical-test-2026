@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,8 +9,6 @@
     "test": "ng test"
   },
   "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
     "overrides": [
       {
         "files": "*.html",
@@ -20,7 +18,6 @@
       }
     ]
   },
-  "private": true,
   "packageManager": "npm@11.10.0",
   "dependencies": {
     "@angular/common": "^21.1.0",

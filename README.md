@@ -12,7 +12,7 @@ This is an Angular technical test project. The goal of this technical test is to
 1. `npm i`: Install all dependencies.
 2. `npm start`: Launch client app and api server.
 3. Then go to : http://localhost:4200
-4. The displayed categories are accessible here : `http://localhost:4200/visible-categories`.
+4. The displayed categories are accessible here : `http://localhost:4200/visible-categories`
 
 ## Architecture
 
