@@ -7,6 +7,10 @@
 
 This is an Angular technical test project. The goal of this technical test is to display categories with filters and a search function.
 
+## Requirements
+
+- Node.js `^22.12.0 || ^24.0.0`;
+
 ## How to run
 
 1. `npm i`: Install all dependencies.

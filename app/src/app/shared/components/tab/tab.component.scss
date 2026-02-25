@@ -1,13 +1,13 @@
 @use '../../../../assets/styles/base/mixins' as mixins;
 
 @font-palette-values --normal {
-  font-family: 'icons';
+  font-family: icons;
   base-palette: 0;
   override-colors: 2 #636970;
 }
 
 @font-palette-values --active {
-  font-family: 'icons';
+  font-family: icons;
   base-palette: 0;
   override-colors: 2 #11abec;
 }

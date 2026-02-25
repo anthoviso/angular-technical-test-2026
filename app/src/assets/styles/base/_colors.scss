@@ -1,20 +1,21 @@
 html {
   --white: #fff;
   --color-text-btn: var(--white);
-
   --color-separator: #dce4ed;
   --color-paragraph: #58676d;
   --color-text: #636970;
   --color-title: #001a25;
-
   --color-bg-hover: #f3f5f8;
 
+  // primary
   --color-bg-primary: #f1f7fc;
   --color-text-primary: #11abec;
 
+  // secondary
   --color-bg-secondary: #ffece6;
   --color-text-secondary: #fd755f;
 
+  // tertiary
   --color-bg-tertiary: #fff5bf;
   --color-text-tertiary: #faa11c;
 }

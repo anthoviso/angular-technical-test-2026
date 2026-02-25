@@ -4,6 +4,14 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.0.
 
+## Scripts
+
+- `start`: Start app.
+- `build`: Build app.
+- `watch`: Hot reload app.
+- `test`: Launch tests
+- `stylelint`: Run Scss lint.
+
 ## Icon Moon
 
 [Icomoon](https://icomoon.io) is an online tool. It helps to fix icons and generate a font to use them.
