@@ -1,16 +1,20 @@
 <div class="visible-categories">
   <div class="container visible-categories__container">
-    <form id="visibleCategoriesForm" class="visible-categories__form">
-      <app-search-input class="visible-categories__form__search" />
-      <app-select-input class="visible-categories__form__select">
+    <form [formGroup]="form" id="visibleCategoriesForm" class="visible-categories__form">
+      <fieldset class="visible-categories__form__search">
+        <span class="icon visible-categories__form__search__icon"></span>
+        <input class="visible-categories__form__search__input" type="search" placeholder="Rechercher une catégorie" formControlName="search" />
+      </fieldset>
+
+      <select class="visible-categories__form__select" formControlName="group">
         <option value="">Tous les groupes de catégories</option>
         @for (option of groupCategories(); track option.id) {
           <option [value]="option.id">{{ option.name }}</option>
         }
-      </app-select-input>
+      </select>
     </form>
     <ul class="visible-categories__list">
-      @for (category of visibleCategories(); track category.id) {
+      @for (category of categoriesSearchResults(); track category.id) {
         <li class="visible-categories__list-item">
           <app-category [category]="category" />
         </li>

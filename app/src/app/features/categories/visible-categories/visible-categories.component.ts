@@ -2,25 +2,32 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { CategoriesApi } from '../categories.api';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Category, Group } from '../categories.models';
-import { CategoryComponent } from '../../../shared/components/category/category.component';
-import { SearchInputComponent } from '../../../shared/components/search-input/search-input.component';
-import { SelectInputComponent } from '../../../shared/components/select-input/select-input.component';
+import { CategoryComponent } from '../components/category/category.component';
+import { FormControl, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-visible-categories',
   templateUrl: './visible-categories.component.html',
   styleUrl: './visible-categories.component.scss',
-  imports: [CategoryComponent, SearchInputComponent, SelectInputComponent],
+  imports: [CategoryComponent, ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VisibleCategoriesComponent {
   private readonly categoriesApi = inject(CategoriesApi);
+  private readonly fb = inject(NonNullableFormBuilder);
 
   private readonly allCategories = toSignal<Category[]>(this.categoriesApi.getAllCategories());
   private readonly visibleCategoriesIds = toSignal<number[]>(this.categoriesApi.getVisibleCategories());
 
-  protected readonly visibleCategories = computed<Category[]>(() => this.getVisibleCategories());
+  private readonly visibleCategories = computed<Category[]>(() => this.getVisibleCategories());
   protected readonly groupCategories = computed<Group[]>(() => this.getGroupCategories());
+  protected readonly categoriesSearchResults = computed<Category[]>(() => this.getSearchResults());
+
+  form = this.fb.group<{ search: FormControl<string>; group: FormControl<string> }>({
+    search: this.fb.control<string>(''),
+    group: this.fb.control<string>(''),
+  });
+  private readonly formValuesChange = toSignal<Partial<{ search: string; group: string }>>(this.form.valueChanges);
 
   private getVisibleCategories(): Category[] {
     const categories = this.allCategories();
@@ -40,5 +47,21 @@ export class VisibleCategoriesComponent {
       }
       return groups;
     }, []);
+  }
+
+  private getSearchResults(): Category[] {
+    const formValues: Partial<{ search: string; group: string }> | undefined = this.formValuesChange();
+
+    if (!formValues) {
+      return this.visibleCategories();
+    }
+
+    return this.visibleCategories().filter((category) => {
+      const matchesGroup = !formValues.group || category.group?.id === +formValues.group;
+
+      const matchesSearch = !formValues.search || category.wording.toLowerCase().includes(formValues.search.toLowerCase());
+
+      return matchesGroup && matchesSearch;
+    });
   }
 }
