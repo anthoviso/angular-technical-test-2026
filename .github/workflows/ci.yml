@@ -8,18 +8,23 @@ jobs:
   ci:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: app
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: app/package-lock.json
+          cache-dependency-path: |
+            package-lock.json 
+            app/package-lock.json
+
       - run: npm i
+
       - run: npm run build -- --configuration=production
+        working-directory: app
+
       - run: npm run test -- --watch=false --coverage
+        working-directory: app
+
       - run: npm run stylelint
+        working-directory: app
