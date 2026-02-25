@@ -26,5 +26,8 @@ jobs:
       - run: npm run stylelint
         working-directory: app
 
+      - run: npm run lint
+        working-directory: app
+
       - run: npm run test -- --watch=false --coverage
         working-directory: app
