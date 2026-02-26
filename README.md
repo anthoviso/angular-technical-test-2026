@@ -9,7 +9,11 @@ This is an Angular technical test project. The goal of this technical test is to
 
 ## How to run with Docker
 
-- TO DO
+1. Docker is required.
+2. Run `sudo docker build -t test .` at root project to build test.
+3. Run `sudo docker run -p 4200:4200 -p 3001:3001 test` at root project to launch test.
+4. Then go to : http://localhost:4200
+5. The displayed categories are accessible here : `http://localhost:4200/visible-categories`
 
 ## How to run with Node.js
 
