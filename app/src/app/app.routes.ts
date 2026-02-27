@@ -1,6 +1,10 @@
 import { Routes } from '@angular/router';
 import { allCategoriesResolver, visibleCategoriesResolver } from '@features/categories/categories.resolver';
 
+export const FRAGMENTS = {
+  alpha: 'alpha',
+};
+
 export const routes: Routes = [
   {
     path: 'visible-categories',

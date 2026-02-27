@@ -2,8 +2,8 @@
   <div class="container visible-categories__container">
     <form [formGroup]="form" id="visibleCategoriesForm" class="visible-categories__form">
       <fieldset class="visible-categories__form__search">
-        <span class="icon visible-categories__form__search__icon"></span>
-        <input class="visible-categories__form__search__input" type="search" placeholder="Rechercher une catégorie" formControlName="search" />
+        <span class="icon visible-categories__form__search-icon"></span>
+        <input class="visible-categories__form__search-input" type="search" placeholder="Rechercher une catégorie" formControlName="search" />
       </fieldset>
 
       <select class="visible-categories__form__select" formControlName="group">
@@ -13,12 +13,27 @@
         }
       </select>
     </form>
-    <ul class="visible-categories__list">
-      @for (category of categoriesSearchResults(); track category.id) {
-        <li class="visible-categories__list-item">
-          <app-category [category]="category" />
-        </li>
+    @if (fragment() === FRAGMENTS.alpha) {
+      <ul class="visible-categories__list">
+        @for (category of searchResults() | sort: 'wording'; track category.id) {
+          <li class="visible-categories__list-item">
+            <app-category [category]="category" />
+          </li>
+        }
+      </ul>
+    } @else {
+      @for (grouped of groupedSearchResults(); track grouped.group.id) {
+        <app-tag [color]="grouped.group.color" variant="secondary">
+          {{ grouped.group.name }}
+        </app-tag>
+        <ul class="visible-categories__list">
+          @for (category of grouped.categories | sort: 'wording'; track category.id) {
+            <li class="visible-categories__list-item">
+              <app-category [category]="category" [showGroupTag]="false" />
+            </li>
+          }
+        </ul>
       }
-    </ul>
+    }
   </div>
 </div>

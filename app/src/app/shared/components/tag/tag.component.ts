@@ -8,4 +8,5 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 })
 export class TagComponent {
   readonly color = input<string>();
+  readonly variant = input<'primary' | 'secondary'>('primary');
 }

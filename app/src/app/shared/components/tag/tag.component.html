@@ -1,3 +1,3 @@
-<div class="tag tag--{{ color() }} text">
+<div class="tag tag--{{ color() }} text" [class.tag--secondary]="variant() === 'secondary'">
   <ng-content />
 </div>

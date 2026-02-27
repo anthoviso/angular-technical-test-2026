@@ -1,5 +1,5 @@
 <div class="category">
-  @if (category().group; as group) {
+  @if (showGroupTag() && category().group; as group) {
     <app-tag [color]="group.color">
       {{ group.name }}
     </app-tag>

@@ -4,6 +4,7 @@ import { filter, map, startWith } from 'rxjs/operators';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { TabComponent } from '../tab/tab.component';
+import { FRAGMENTS } from 'app/app.routes';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +18,8 @@ export class HeaderComponent {
   private readonly route = inject(ActivatedRoute);
   protected readonly title: Signal<string> = toSignal(this.getTitle(), { initialValue: '' });
   protected readonly fragment = toSignal(this.route.fragment, { initialValue: '' });
+
+  protected readonly FRAGMENTS = FRAGMENTS;
 
   private getTitle(): Observable<string> {
     return this.router.events.pipe(

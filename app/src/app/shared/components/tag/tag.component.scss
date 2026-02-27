@@ -16,4 +16,9 @@
     color: var(--color-text-secondary);
     background: var(--color-bg-secondary);
   }
+
+  &--secondary {
+    display: block;
+    border-radius: 0;
+  }
 }

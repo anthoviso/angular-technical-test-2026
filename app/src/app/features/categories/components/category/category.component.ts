@@ -11,4 +11,5 @@ import { Category } from '../../categories.models';
 })
 export class CategoryComponent {
   readonly category = input.required<Category>();
+  readonly showGroupTag = input<boolean>(true);
 }

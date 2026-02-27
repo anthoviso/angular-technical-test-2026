@@ -4,8 +4,8 @@
       {{ title() }}
     </h1>
     <div class="header__tabs">
-      <app-tab icon="" text="Groupe de catégorie" [isActive]="fragment() !== 'alpha'"  />
-      <app-tab icon="" text="Ordre alphabétique" [isActive]="fragment() === 'alpha'" fragment="alpha" />
+      <app-tab icon="" text="Groupe de catégorie" [isActive]="fragment() !== FRAGMENTS.alpha"  />
+      <app-tab icon="" text="Ordre alphabétique" [isActive]="fragment() === FRAGMENTS.alpha" [fragment]="FRAGMENTS.alpha" />
     </div>
   </div>
 </header>
