@@ -1,39 +1,67 @@
 <div class="visible-categories">
   <div class="container visible-categories__container">
     <form [formGroup]="form" id="visibleCategoriesForm" class="visible-categories__form">
-      <fieldset class="visible-categories__form__search">
-        <span class="icon visible-categories__form__search-icon"></span>
-        <input class="visible-categories__form__search-input" type="search" placeholder="Rechercher une catégorie" formControlName="search" />
-      </fieldset>
+      <div class="visible-categories__filters">
+        <fieldset class="visible-categories__filters__search">
+          <span class="icon visible-categories__filters__search-icon"></span>
+          <input class="visible-categories__filters__search-input" type="search" placeholder="Rechercher une catégorie" formControlName="search" />
+        </fieldset>
 
-      <select class="visible-categories__form__select" formControlName="group">
-        <option value="">Tous les groupes de catégories</option>
-        @for (option of groupCategories(); track option.id) {
-          <option [value]="option.id">{{ option.name }}</option>
-        }
-      </select>
-    </form>
-    @if (fragment() === FRAGMENTS.alpha) {
-      <ul class="visible-categories__list">
-        @for (category of searchResults() | sort: 'wording'; track category.id) {
-          <li class="visible-categories__list-item">
-            <app-category [category]="category" />
-          </li>
-        }
-      </ul>
-    } @else {
-      @for (grouped of groupedSearchResults(); track grouped.group.id) {
-        <app-tag [color]="grouped.group.color" variant="secondary">
-          {{ grouped.group.name }}
-        </app-tag>
-        <ul class="visible-categories__list">
-          @for (category of grouped.categories | sort: 'wording'; track category.id) {
-            <li class="visible-categories__list-item">
-              <app-category [category]="category" [showGroupTag]="false" />
-            </li>
+        <div class="select-wrapper">
+          <select class="visible-categories__filters__select" formControlName="group">
+            <option value="">Tous les groupes de catégories</option>
+            @for (option of groupCategories(); track option.id) {
+              <option [value]="option.id">{{ option.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+      <fieldset>
+        @if (fragment() === FRAGMENTS.alpha) {
+          <div class="visible-categories__list visible-categories__list--top-bordered">
+            @for (category of searchResults() | sort: 'wording'; track category.id) {
+              <div class="visible-categories__list-item">
+                <input
+                  formControlName="categoryId"
+                  id="cat-{{ category.id }}"
+                  type="radio"
+                  name="categoryId"
+                  [attr.aria-describedby]="category.wording"
+                  [value]="category.id"
+                  class="hidden"
+                />
+                <label for="cat-{{ category.id }}" tabindex="0">
+                  <app-category [category]="category" [isActive]="formSelectedCategoryId() === category.id" />
+                </label>
+              </div>
+            }
+          </div>
+        } @else {
+          @for (grouped of groupedSearchResults(); track grouped.group.id) {
+            <app-tag class="visible-categories__list-tag" [color]="grouped.group.color" variant="secondary">
+              {{ grouped.group.name }}
+            </app-tag>
+            <div class="visible-categories__list">
+              @for (category of grouped.categories | sort: 'wording'; track category.id) {
+                <div class="visible-categories__list-item">
+                  <input
+                    formControlName="categoryId"
+                    id="grp-cat-{{ category.id }}"
+                    type="radio"
+                    name="categoryId"
+                    [attr.aria-describedby]="category.wording"
+                    [value]="category.id"
+                    class="hidden"
+                  />
+                  <label for="grp-cat-{{ category.id }}" tabindex="0">
+                    <app-category [category]="category" [isActive]="formSelectedCategoryId() === category.id" [showGroupTag]="false" />
+                  </label>
+                </div>
+              }
+            </div>
           }
-        </ul>
-      }
-    }
+        }
+      </fieldset>
+    </form>
   </div>
 </div>

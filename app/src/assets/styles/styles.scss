@@ -5,6 +5,7 @@
 @use './base/colors' as *;
 @use './base/fonts' as *;
 @use './base/texts' as *;
+@use './base/form' as *;
 
 main {
   background: var(--color-bg-primary);
@@ -14,4 +15,8 @@ main {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
+}
+
+.hidden {
+  display: none;
 }

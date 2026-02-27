@@ -1,9 +1,19 @@
 @use '../../../../assets/styles/base/mixins' as mixins;
 
+:host {
+  height: 60px;
+  display: block;
+}
+
 .footer {
   height: 60px;
   display: flex;
   align-items: center;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background: var(--white);
 
   &__container {
     display: flex;
@@ -11,6 +21,7 @@
   }
 
   &__btn {
+    cursor: pointer;
     background: var(--color-text-primary);
     color: var(--color-text-btn);
     border: none;

@@ -3,7 +3,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, startWith } from 'rxjs/operators';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
-import { TabComponent } from '../tab/tab.component';
+import { TabComponent } from '../../../shared/components/tab/tab.component';
 import { FRAGMENTS } from 'app/app.routes';
 
 @Component({

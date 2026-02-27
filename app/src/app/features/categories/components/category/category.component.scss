@@ -1,4 +1,7 @@
+@use '../../../../../assets/styles/base/mixins' as mixins;
+
 .category {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -6,12 +9,17 @@
   height: 100%;
   cursor: pointer;
 
-  &:hover {
-    background: var(--color-bg-hover);
+  &__text {
+    font-size: mixins.px-to-rems(14px);
   }
 
-  &:active {
+  &:hover {
     background: var(--color-bg-primary);
+  }
+
+  &--active,
+  &:active {
+    background: var(--color-bg-hover);
     box-shadow: 0 0 1px var(--color-text-primary);
   }
 }

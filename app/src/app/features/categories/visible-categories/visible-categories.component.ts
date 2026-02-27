@@ -2,12 +2,13 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Category, Group } from '../categories.models';
 import { CategoryComponent } from '../components/category/category.component';
-import { FormControl, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
 import { SortPipe } from '@shared/pipes/sort.pipe';
 import { FRAGMENTS } from 'app/app.routes';
 import { TagComponent } from '@shared/components/tag/tag.component';
+import { CategoriesService } from '../categories.service';
 
 @Component({
   selector: 'app-visible-categories',
@@ -18,10 +19,12 @@ import { TagComponent } from '@shared/components/tag/tag.component';
 })
 export class VisibleCategoriesComponent {
   private readonly route = inject(ActivatedRoute);
-  private readonly fb = inject(NonNullableFormBuilder);
+  private readonly categoriesService = inject(CategoriesService);
 
   private readonly allCategories = toSignal<Category[]>(this.route.data.pipe(map((data) => data['allCategories'])));
   private readonly visibleCategoriesIds = toSignal<number[]>(this.route.data.pipe(map((data) => data['visibleCategories'])));
+  protected readonly formSelectedCategoryId = this.categoriesService.formSelectedCategoryId;
+  protected readonly form = this.categoriesService.form;
 
   protected readonly fragment = toSignal(this.route.fragment, { initialValue: '' });
   protected readonly FRAGMENTS = FRAGMENTS;
@@ -31,11 +34,7 @@ export class VisibleCategoriesComponent {
   protected readonly searchResults = computed<Category[]>(() => this.getSearchResults());
   protected readonly groupedSearchResults = computed<{ group: Group; categories: Category[] }[]>(() => this.getGroupedSearchResults());
 
-  form = this.fb.group<{ search: FormControl<string>; group: FormControl<string> }>({
-    search: this.fb.control<string>(''),
-    group: this.fb.control<string>(''),
-  });
-  private readonly formValuesChange = toSignal<Partial<{ search: string; group: string }>>(this.form.valueChanges);
+  private readonly formValuesChange = toSignal<Partial<{ search: string; group: string }>>(this.categoriesService.form.valueChanges);
 
   // Return all visible categories by filtering all categories with visible categories ids
   private getVisibleCategories(): Category[] {
