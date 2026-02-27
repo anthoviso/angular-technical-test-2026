@@ -1,9 +1,9 @@
 .select-wrapper {
   position: relative;
 
-  &:before {
+  &::before {
     content: '\f000';
-    font-family: icons;
+    font-family: icons, sans-serif;
     color: #fff;
     display: inline-block;
     position: absolute;
@@ -15,7 +15,5 @@
 }
 
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }

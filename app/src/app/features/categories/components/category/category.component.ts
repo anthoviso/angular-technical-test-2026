@@ -17,11 +17,15 @@ export class CategoryComponent {
   readonly showGroupTag = input<boolean>(true);
   readonly isActive = input<boolean>(false);
 
-  protected readonly description = computed<string>(() => {
-    if (!this.category().description) {
-      return 'Aucune description';
+  protected readonly description = computed<string>(() => this.getSanitizedDescription(this.category().description));
+
+  private getSanitizedDescription(description: string | null): string {
+    const NO_DESC_VALUE = 'Aucune description';
+
+    if (!description) {
+      return NO_DESC_VALUE;
     }
 
-    return this.domSanitizer.sanitize(SecurityContext.HTML, this.category().description) ?? 'Aucune description';
-  });
+    return this.domSanitizer.sanitize(SecurityContext.HTML, description) ?? NO_DESC_VALUE;
+  }
 }
