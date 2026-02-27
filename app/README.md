@@ -10,11 +10,13 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 - `build`: Build app.
 - `watch`: Hot reload app.
 - `test`: Launch tests
-- `stylelint`: Run Scss lint.
+- `stylelint`: Run Scss files lint.
+- `lint`: Run javascript/Typescript files lint.
 
 ## Icon Moon
 
-[Icomoon](https://icomoon.io) is an online tool. It helps to fix icons and generate a font to use them.
+[Icomoon](https://icomoon.io) is an online tool. It helps to fix svg icons and generate a font to use them.
+You can run the html page [icons-demo.html](src/assets/fonts/icons-demo.html) to see how to use it.
 
 ## Development server
 
