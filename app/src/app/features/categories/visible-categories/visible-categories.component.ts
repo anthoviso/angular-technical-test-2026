@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { CategoriesApi } from '../categories.api';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Category, Group } from '../categories.models';
 import { CategoryComponent } from '../components/category/category.component';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-visible-categories',
@@ -13,11 +14,11 @@ import { FormControl, NonNullableFormBuilder, ReactiveFormsModule } from '@angul
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VisibleCategoriesComponent {
-  private readonly categoriesApi = inject(CategoriesApi);
+  private readonly route = inject(ActivatedRoute);
   private readonly fb = inject(NonNullableFormBuilder);
 
-  private readonly allCategories = toSignal<Category[]>(this.categoriesApi.getAllCategories());
-  private readonly visibleCategoriesIds = toSignal<number[]>(this.categoriesApi.getVisibleCategories());
+  private readonly allCategories = toSignal<Category[]>(this.route.data.pipe(map((data) => data['allCategories'])));
+  private readonly visibleCategoriesIds = toSignal<number[]>(this.route.data.pipe(map((data) => data['visibleCategories'])));
 
   private readonly visibleCategories = computed<Category[]>(() => this.getVisibleCategories());
   protected readonly groupCategories = computed<Group[]>(() => this.getGroupCategories());
@@ -29,17 +30,19 @@ export class VisibleCategoriesComponent {
   });
   private readonly formValuesChange = toSignal<Partial<{ search: string; group: string }>>(this.form.valueChanges);
 
+  // Return all visible categories by filtering all categories with visible categories ids
   private getVisibleCategories(): Category[] {
-    const categories = this.allCategories();
-    const visibleCategoryIds = this.visibleCategoriesIds();
+    const allCategories = this.allCategories();
+    const visibleCategoriesIds = this.visibleCategoriesIds();
 
-    if (!categories || !visibleCategoryIds) {
+    if (!allCategories || !visibleCategoriesIds) {
       return [];
     }
 
-    return categories.filter((category) => visibleCategoryIds.includes(category.id));
+    return allCategories.filter((category) => visibleCategoriesIds.includes(category.id));
   }
 
+  // Return all groups of visible categories without duplicates
   private getGroupCategories(): Group[] {
     return this.getVisibleCategories().reduce((groups: Group[], category) => {
       if (category.group && !groups.some((group) => group.id === category.group?.id)) {
@@ -49,6 +52,7 @@ export class VisibleCategoriesComponent {
     }, []);
   }
 
+  // Return search results by filtering visible categories with form values
   private getSearchResults(): Category[] {
     const formValues: Partial<{ search: string; group: string }> | undefined = this.formValuesChange();
 
