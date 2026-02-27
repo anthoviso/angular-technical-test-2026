@@ -1,6 +1,6 @@
 <a [routerLink]="[]" [fragment]="fragment()" class="tab {{ isActive() ? 'tab--active' : '' }}">
   @if (icon(); as icon) {
-    <span class="icon">{{ icon }}</span>
+    <span [attr.data-testid]="'tabIcon'" class="icon">{{ icon }}</span>
   }
   {{ text() }}
 </a>
