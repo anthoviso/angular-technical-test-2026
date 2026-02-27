@@ -7,7 +7,7 @@
           <input class="visible-categories__filters__search-input" type="search" placeholder="Rechercher une catégorie" formControlName="search" />
         </fieldset>
 
-        <div class="select-wrapper">
+        <div class="visible-categories__filters__select-wrapper select-wrapper">
           <select class="visible-categories__filters__select" formControlName="group">
             <option value="">Tous les groupes de catégories</option>
             @for (option of groupCategories(); track option.id) {

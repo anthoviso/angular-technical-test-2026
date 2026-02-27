@@ -56,6 +56,11 @@
       height: 2.25rem;
       line-height: 1rem;
       padding: 0 0.75rem;
+      width: 100%;
+
+      &-wrapper {
+        min-width: 18rem;
+      }
     }
   }
 

@@ -5,5 +5,5 @@
     </app-tag>
   }
   <h3 class="subtitle font-w-400">{{ category().wording }}</h3>
-  <p class="category__text text">{{ category().description ?? 'Aucune description' }}</p>
+  <p class="category__text text" [innerHTML]="description()"></p>
 </div>
