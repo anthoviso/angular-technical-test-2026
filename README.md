@@ -30,9 +30,11 @@ This is an Angular technical test project. The goal of this technical test is to
 
 ## Documentation
 
-1. [Express server](api/README.md)
-2. [Angular client](app/README.md)
-3. [Git hooks](doc/git.md)
+1. [Our Express server's README](api/README.md)
+2. [Our Angular client's README](app/README.md)
+3. [Here we use Git hooks](doc/git.md)
+4. [Run the projet inside containers with Docker](https://www.docker.com/)
+5. [Validate project processes runing pipelines with Github CI](doc/CI.md)
 
 ## Scripts
 
@@ -49,3 +51,4 @@ This is an Angular technical test project. The goal of this technical test is to
 
 - **Renovate** for automatic dependencies updates.
 - **Xray** or **SonarQube** for quality assurance, security vulnerabilities, CVEs.
+- Add visual testing tools like **Chromatic** or **StoryBook** that have this functionality too.
