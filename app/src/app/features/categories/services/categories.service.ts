@@ -2,6 +2,12 @@ import { computed, inject, Injectable } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 
+export interface CategoriesForm {
+  search: string;
+  group: string;
+  categoryId: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -13,6 +19,6 @@ export class CategoriesService {
     group: this.fb.control<string>(''),
     categoryId: this.fb.control<number | undefined>(undefined, Validators.required),
   });
-  readonly formValuesChange = toSignal<Partial<{ search: string; group: string; categoryId: number }>>(this.form.valueChanges);
+  readonly formValuesChange = toSignal<Partial<CategoriesForm>>(this.form.valueChanges);
   readonly formSelectedCategoryId = computed<number | undefined>(() => this.formValuesChange()?.categoryId);
 }

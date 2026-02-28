@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { Category } from './categories.models';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+import { Category } from '../categories.models';
 
 export const BASE_URL = '/api';
 

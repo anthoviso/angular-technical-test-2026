@@ -8,7 +8,7 @@ import { map } from 'rxjs';
 import { SortPipe } from '@shared/pipes/sort.pipe';
 import { FRAGMENTS } from 'app/app.routes';
 import { TagComponent } from '@shared/components/tag/tag.component';
-import { CategoriesService } from '../categories.service';
+import { CategoriesForm, CategoriesService } from '../services/categories.service';
 
 @Component({
   selector: 'app-visible-categories',
@@ -21,20 +21,24 @@ export class VisibleCategoriesComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly categoriesService = inject(CategoriesService);
 
+  // Resolved datas
   private readonly allCategories = toSignal<Category[]>(this.route.data.pipe(map((data) => data['allCategories'])));
   private readonly visibleCategoriesIds = toSignal<number[]>(this.route.data.pipe(map((data) => data['visibleCategories'])));
-  protected readonly formSelectedCategoryId = this.categoriesService.formSelectedCategoryId;
-  protected readonly form = this.categoriesService.form;
 
+  // Route datas
   protected readonly fragment = toSignal(this.route.fragment, { initialValue: '' });
   protected readonly FRAGMENTS = FRAGMENTS;
 
+  // Category service shared data
+  protected readonly form = this.categoriesService.form;
+  private readonly formValuesChange = toSignal<Partial<CategoriesForm>>(this.form.valueChanges);
+  protected readonly formSelectedCategoryId = this.categoriesService.formSelectedCategoryId;
+
+  // Calculated Data
   private readonly visibleCategories = computed<Category[]>(() => this.getVisibleCategories());
   protected readonly groupCategories = computed<Group[]>(() => this.getGroupCategories());
   protected readonly searchResults = computed<Category[]>(() => this.getSearchResults());
   protected readonly groupedSearchResults = computed<{ group: Group; categories: Category[] }[]>(() => this.getGroupedSearchResults());
-
-  private readonly formValuesChange = toSignal<Partial<{ search: string; group: string }>>(this.categoriesService.form.valueChanges);
 
   // Return all visible categories by filtering all categories with visible categories ids
   private getVisibleCategories(): Category[] {
@@ -60,7 +64,7 @@ export class VisibleCategoriesComponent {
 
   // Return search results by filtering visible categories with form values
   private getSearchResults(): Category[] {
-    const formValues: Partial<{ search: string; group: string }> | undefined = this.formValuesChange();
+    const formValues: Partial<CategoriesForm> | undefined = this.formValuesChange();
 
     if (!formValues) {
       return this.visibleCategories();
@@ -68,13 +72,13 @@ export class VisibleCategoriesComponent {
 
     return this.visibleCategories().filter((category) => {
       const matchesGroup = !formValues.group || category.group?.id === +formValues.group;
-
       const matchesSearch = !formValues.search || category.wording.toLowerCase().includes(formValues.search.toLowerCase());
 
       return matchesGroup && matchesSearch;
     });
   }
 
+  // Return search grouped results by filtering visible categories with form values
   private getGroupedSearchResults(): { group: Group; categories: Category[] }[] {
     const NO_GROUP: Group = {
       id: -1,
@@ -84,7 +88,6 @@ export class VisibleCategoriesComponent {
 
     return this.searchResults().reduce((acc: { group: Group; categories: Category[] }[], category: Category) => {
       const group: Group = category.group ?? NO_GROUP;
-
       let existingGroup: { group: Group; categories: Category[] } | undefined = acc.find((entry) => entry.group.id === group.id);
 
       if (!existingGroup) {

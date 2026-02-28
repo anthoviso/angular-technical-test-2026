@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CategoriesService } from '@features/categories/categories.service';
+import { CategoriesService } from '@features/categories/services/categories.service';
 
 @Component({
   selector: 'app-footer',

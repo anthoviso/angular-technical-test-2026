@@ -18,7 +18,7 @@
       </div>
       <fieldset>
         @if (fragment() === FRAGMENTS.alpha) {
-          <div class="visible-categories__list visible-categories__list--top-bordered">
+          <div [attr.data-testid]="'visibleCatFragment'" class="visible-categories__list visible-categories__list--top-bordered">
             @for (category of searchResults() | sort: 'wording'; track category.id) {
               <div class="visible-categories__list-item">
                 <input
@@ -30,7 +30,7 @@
                   [value]="category.id"
                   class="hidden"
                 />
-                <label for="cat-{{ category.id }}" tabindex="0">
+                <label for="cat-{{ category.id }}">
                   <app-category [category]="category" [isActive]="formSelectedCategoryId() === category.id" />
                 </label>
               </div>
@@ -53,7 +53,7 @@
                     [value]="category.id"
                     class="hidden"
                   />
-                  <label for="grp-cat-{{ category.id }}" tabindex="0">
+                  <label for="grp-cat-{{ category.id }}">
                     <app-category [category]="category" [isActive]="formSelectedCategoryId() === category.id" [showGroupTag]="false" />
                   </label>
                 </div>

@@ -1,13 +1,17 @@
 import { Routes } from '@angular/router';
-import { allCategoriesResolver, visibleCategoriesResolver } from '@features/categories/categories.resolver';
+import { allCategoriesResolver, visibleCategoriesResolver } from '@features/categories/resolvers/categories.resolver';
 
 export const FRAGMENTS = {
   alpha: 'alpha',
 };
 
+export const APP_ROUTES = {
+  categories: 'visible-categories',
+};
+
 export const routes: Routes = [
   {
-    path: 'visible-categories',
+    path: APP_ROUTES.categories,
     loadComponent: () => import('./features/categories/visible-categories/visible-categories.component').then((m) => m.VisibleCategoriesComponent),
     data: {
       title: 'Catégories',
@@ -19,6 +23,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'visible-categories',
+    redirectTo: APP_ROUTES.categories,
   },
 ];

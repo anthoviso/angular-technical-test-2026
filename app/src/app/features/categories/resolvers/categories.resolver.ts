@@ -1,8 +1,8 @@
 import { ResolveFn } from '@angular/router';
-import { Category } from './categories.models';
+import { Category } from '../categories.models';
 import { catchError, Observable } from 'rxjs';
-import { CategoriesApi } from './categories.api';
 import { inject } from '@angular/core';
+import { CategoriesApi } from '../api/categories.api';
 
 export const allCategoriesResolver: ResolveFn<Category[]> = (): Observable<Category[]> => {
   const categoriesApi = inject(CategoriesApi);
