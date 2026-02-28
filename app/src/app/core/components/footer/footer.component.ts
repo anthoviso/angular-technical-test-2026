@@ -10,6 +10,7 @@ import { CategoriesService } from '@features/categories/services/categories.serv
 export class FooterComponent {
   private readonly categoriesService = inject(CategoriesService);
 
+  // This method is called when the form is submitted. It checks if the form is valid and resets it if it is.
   protected submited(): void {
     const form = this.categoriesService.form;
 
@@ -17,6 +18,8 @@ export class FooterComponent {
       return;
     }
 
+    // Maybe doing something with the form data here, like sending it to an API or updating some state
+    // Then reset the form after successful submission
     form.reset();
   }
 }
