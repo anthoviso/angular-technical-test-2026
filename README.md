@@ -51,4 +51,5 @@ This is an Angular technical test project. The goal of this technical test is to
 
 - **Renovate** for automatic dependencies updates.
 - **Xray** or **SonarQube** for quality assurance, security vulnerabilities, CVEs.
+- Add functional testing tools like **Cypress**.
 - Add visual testing tools like **Chromatic** or **StoryBook** that have this functionality too.
