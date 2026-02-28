@@ -38,7 +38,7 @@ This is an Angular technical test project. The goal of this technical test is to
 
 ## Scripts
 
-- `npm i`: Install all dependencies.
+- `npm ci`: Install all dependencies.
 - `npm start`: Launch client app and api server.
 - `npm run start:app`: Launch only client app.
 - `npm run start:api`: Launch only api server.
