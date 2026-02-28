@@ -1,6 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { CategoriesApi } from '../api/categories.api';
-import { throwError } from 'rxjs';
+import { firstValueFrom, Observable, throwError } from 'rxjs';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { EnvironmentInjector, runInInjectionContext } from '@angular/core';
+import { allCategoriesResolver, visibleCategoriesResolver } from './categories.resolver';
+import { Category } from '../categories.models';
 
 class MockCategoriesApi {
   getAllCategories = vi.fn();
@@ -9,29 +13,27 @@ class MockCategoriesApi {
 
 describe('Categories resolvers', () => {
   let categoriesApi: MockCategoriesApi;
-  // let allCategoriesResolver: ResolveFn<Category[]>;
-  // let visibleCategoriesResolver: ResolveFn<Category[]>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [{ provide: CategoriesApi, useClass: MockCategoriesApi }],
     });
-    // allCategoriesResolver = TestBed.inject(allCategoriesResolver) as ResolveFn<Category[]>;
-    // visibleCategoriesResolver = TestBed.inject(visibleCategoriesResolver) as ResolveFn<Category[]>;
     categoriesApi = TestBed.inject(CategoriesApi) as unknown as MockCategoriesApi;
   });
 
   it('should catch error in allCategoriesResolver', async () => {
     categoriesApi.getAllCategories.mockReturnValueOnce(throwError(() => new Error('API error')));
-    // TO DO
-    // const obs$ = allCategoriesResolver();
-    // await expect(() => firstValueFrom(obs$)).rejects.toThrow(error);
+    const result = runInInjectionContext(TestBed.inject(EnvironmentInjector), () =>
+      allCategoriesResolver({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot),
+    );
+    await expect(firstValueFrom(result as Observable<Category[]>)).rejects.toThrow('Error: API error - Unable to fetch all categories');
   });
 
   it('should catch error in visibleCategoriesResolver', async () => {
     categoriesApi.getVisibleCategories.mockReturnValueOnce(throwError(() => new Error('API error')));
-    // TO DO
-    // const obs$ = visibleCategoriesResolver();
-    // await expect(() => firstValueFrom(obs$)).rejects.toThrow(error);
+    const result = runInInjectionContext(TestBed.inject(EnvironmentInjector), () =>
+      visibleCategoriesResolver({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot),
+    );
+    await expect(firstValueFrom(result as Observable<number[]>)).rejects.toThrow('Error: API error - Unable to fetch visible categories');
   });
 });

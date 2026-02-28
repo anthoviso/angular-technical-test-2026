@@ -21,6 +21,7 @@ export class HeaderComponent {
 
   protected readonly FRAGMENTS = FRAGMENTS;
 
+  // This method listens to router events and extracts the title from the route data. It returns an observable that emits the title whenever the navigation ends.
   private getTitle(): Observable<string> {
     return this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),

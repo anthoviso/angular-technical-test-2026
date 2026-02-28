@@ -19,6 +19,7 @@ export class CategoryComponent {
 
   protected readonly description = computed<string>(() => this.getSanitizedDescription(this.category().description));
 
+  // This method sanitizes the category description to prevent potential security risks. If the description is null or empty, it returns a default message.
   private getSanitizedDescription(description: string | null): string {
     const NO_DESC_VALUE = 'Aucune description';
 

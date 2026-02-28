@@ -16,5 +16,7 @@ export class FooterComponent {
     if (!form.valid) {
       return;
     }
+
+    form.reset();
   }
 }

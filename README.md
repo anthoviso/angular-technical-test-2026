@@ -18,7 +18,7 @@ This is an Angular technical test project. The goal of this technical test is to
 ## How to run with Node.js
 
 1. Node.js `^22.12.0 || ^24.0.0` is required.
-2. `npm i`: Install all dependencies.
+2. `npm ci`: Install all dependencies.
 3. `npm start`: Launch client app and api server.
 4. Then go to : http://localhost:4200
 5. The displayed categories are accessible here : `http://localhost:4200/visible-categories`

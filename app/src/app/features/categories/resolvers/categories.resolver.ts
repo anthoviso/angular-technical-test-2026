@@ -8,7 +8,7 @@ export const allCategoriesResolver: ResolveFn<Category[]> = (): Observable<Categ
   const categoriesApi = inject(CategoriesApi);
   return categoriesApi.getAllCategories().pipe(
     catchError((error) => {
-      throw error;
+      throw new Error(`${error} - Unable to fetch all categories`);
     }),
   );
 };
@@ -17,7 +17,7 @@ export const visibleCategoriesResolver: ResolveFn<number[]> = (): Observable<num
   const categoriesApi = inject(CategoriesApi);
   return categoriesApi.getVisibleCategories().pipe(
     catchError((error) => {
-      throw error;
+      throw new Error(`${error} - Unable to fetch visible categories`);
     }),
   );
 };
